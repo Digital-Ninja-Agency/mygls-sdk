@@ -39,10 +39,11 @@ class Client
         if (! $this->account) {
             throw new InvalidArgumentException('You need to define an account to make a request!');
         }
+        $url = rtrim($this->account->apiURL(), '/').'/' . 'ParcelService.svc' . '/' . 'json' . '/' . $request->getEndpoint();
 
         $response = $this->client->request(
             $request->getMethod(),
-            rtrim($this->account->apiURL(), '/').'/'.$request->getEndpoint(),
+            $url,
             [
                 'json' => $this->payload($request),
                 'http_errors' => false,
