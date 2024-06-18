@@ -2,6 +2,10 @@
 
 All notable changes to `mygls-sdk` will be documented in this file
 
+# 2.0.1 - 2024-06-18
+
+- add CodCurrency to Parcel
+
 # 1.7.3 - 2023-01-04
 
 - add missing exception class

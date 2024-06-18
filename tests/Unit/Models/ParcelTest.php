@@ -22,6 +22,7 @@ class ParcelTest extends TestCase
             ->setDeliveryInfo(new TestAddress)
             ->setCodAmount(1000)
             ->setCodReference('#order-1')
+            ->setCodCurrency('EUR')
             ->setContent('Comment')
             ->addService(new ParcelShopDelivery('15496'))
             ->addService(new SMS('+363012312312', 'Your package is on its way to GLS facility'));
@@ -30,6 +31,7 @@ class ParcelTest extends TestCase
         $this->assertEquals('order-1', $parcel->getClientReference());
         $this->assertEquals(1000, $parcel->getCodAmount());
         $this->assertEquals('#order-1', $parcel->getCodReference());
+        $this->assertEquals('EUR', $parcel->getCodCurrency());
         $this->assertEquals('Comment', $parcel->getContent());
         $this->assertEquals(1, $parcel->getCount());
         $this->assertEquals(null, $parcel->getPickupDate());

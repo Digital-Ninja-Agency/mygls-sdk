@@ -39,6 +39,11 @@ class Parcel
     /**
      * @var string|null
      */
+    protected $codCurrency;
+
+    /**
+     * @var string|null
+     */
     protected $content;
 
     /**
@@ -117,6 +122,18 @@ class Parcel
     public function setCodReference(string $codReference): self
     {
         $this->codReference = $codReference;
+
+        return $this;
+    }
+
+    public function getCodCurrency(): ?string
+    {
+        return $this->codCurrency;
+    }
+
+    public function setCodCurrency(?string $codCurrency): self
+    {
+        $this->codCurrency = $codCurrency;
 
         return $this;
     }
@@ -211,8 +228,8 @@ class Parcel
             'ClientReference' => $this->clientReference,
             'CODAmount' => $this->codAmount,
             'CODReference' => $this->codReference,
+            'CODCurrency' => $this->codCurrency,
             'Content' => $this->content,
-            'Count' => $this->count,
             'Count' => $this->count,
             'DeliveryAddress' => $this->deliveryInfo ? $this->deliveryInfo->toArray() : null,
             'PickupAddress' => $this->pickupAddress ? $this->pickupAddress->toArray() : null,
@@ -239,6 +256,10 @@ class Parcel
 
         $parcel->when(isset($data['CODReference']), function (Parcel $parcel) use ($data) {
             return $parcel->setCodReference($data['CODReference']);
+        });
+
+        $parcel->when(isset($data['CODCurrency']), function (Parcel $parcel) use ($data) {
+            return $parcel->setCodCurrency($data['CODCurrency']);
         });
 
         $parcel->when(isset($data['Content']), function (Parcel $parcel) use ($data) {
