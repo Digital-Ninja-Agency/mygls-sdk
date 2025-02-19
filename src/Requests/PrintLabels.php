@@ -16,6 +16,9 @@ class PrintLabels extends Request
     /** @var Parcel[] */
     protected $parcelList = [];
 
+    /** @var string */
+    protected $webshopEngine = null;
+
     /**
      * @var int
      */
@@ -34,6 +37,11 @@ class PrintLabels extends Request
     public function addParcel(Parcel $parcel)
     {
         $this->parcelList[] = $parcel;
+    }
+
+    public function webshopEngine(string $webshopEngine)
+    {
+        $this->webshopEngine = $webshopEngine;
     }
 
     public function printPosition(int $position)
@@ -62,6 +70,7 @@ class PrintLabels extends Request
             'ParcelList' => array_map(function (Parcel $parcel) {
                 return $parcel->toArray();
             }, $this->parcelList),
+            'WebshopEngine' => $this->webshopEngine,
             'PrintPosition' => $this->printPosition,
             'ShowPrintDialog' => $this->showPrintDialog,
         ];
@@ -69,7 +78,6 @@ class PrintLabels extends Request
         if ($this->typeOfPrinter) {
             $params['TypeOfPrinter'] = $this->typeOfPrinter;
         }
-
         return $params;
     }
 }
